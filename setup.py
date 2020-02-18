@@ -4,7 +4,7 @@ import os
 import re
 
 from pkg_resources import parse_requirements
-from setuptools import setup
+from setuptools import setup, find_packages
 
 CURDIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -32,11 +32,11 @@ setup(
     long_description=README,
     long_description_content_type='text/markdown',
     url='https://github.com/MrMrRobat/line_info',
-    packages=['line_info'],
+    packages=find_packages(CURDIR),
     include_package_data=True,
     entry_points={'console_scripts': ['line_info=line_info.__main__:main']},
     zip_safe=False,
-    install_requires=map(str, parse_requirements(REQUIREMENTS)),
+    install_requires=[str(req) for req in parse_requirements(REQUIREMENTS)],
     python_requires='>=3.6',
     license='License :: OSI Approved :: MIT License',
     classifiers=[
