@@ -123,7 +123,7 @@ def format_git_info(git_info):
             f'Commit info: {git_info.revision}, {git_info.meta}:\n'
             + commit_message
             + code_line
-            + f'GitLab URL: {get_project_url(git_info.clone_url)}/commit/{git_info.revision}\n'
+            + f'GitLab URL: {git_info.project_url}/commit/{git_info.revision}\n'
     )
     for_search = commit_message + code_line
     return for_search, for_user
@@ -171,8 +171,7 @@ def get_line_info(file, line, selection=''):
         print(
             vcs_issues_message,
             *(
-                get_vcs_issue_url(issue_number,
-                                  get_project_url(git_info.clone_url))
+                get_vcs_issue_url(issue_number, git_info.project_url)
                 for issue_number in vcs_issues
             ),
             sep='\n'
