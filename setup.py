@@ -1,5 +1,4 @@
 import ast
-import io
 import os
 import re
 
@@ -8,16 +7,16 @@ from setuptools import setup, find_packages
 
 CURDIR = os.path.abspath(os.path.dirname(__file__))
 
-with io.open(os.path.join(CURDIR, 'README.md'), 'r', encoding='utf-8') as f:
+with open(os.path.join(CURDIR, 'README.md')) as f:
     README = f.read()
 
-with open(os.path.join(CURDIR, 'requirements.txt'), 'r', encoding='utf-8') as f:
+with open(os.path.join(CURDIR, 'requirements.txt')) as f:
     REQUIREMENTS = f.read()
 
 
 def get_version():
     init_path = os.path.join(CURDIR, 'line_info', '__init__.py')
-    with open(init_path, 'r', encoding='utf8') as init:
+    with open(init_path) as init:
         match = re.search(r'__version__\s+=\s+(?P<version>.*)', init.read())
         version = match.group('version') if match is not None else "'unknown'"
     return str(ast.literal_eval(version))
